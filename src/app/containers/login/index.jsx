@@ -17,7 +17,7 @@ const LOGIN = 'Login';
 export class Login extends Component {
     constructor(props) {
         super(props);
-        this.state = {submitButtonLabel: LOGIN};
+        this.state = {submitButtonLabel: LOGIN, emailValue: '', passwordValue: ''};
     }
 
     componentDidMount() {
@@ -69,6 +69,10 @@ export class Login extends Component {
 
         let form;
 
+        if(error){
+            this.setState({passwordValue: ''});
+        }
+
         return (
             <form onSubmit={(event) => event.preventDefault() & this.onSubmit(form, inputs)}
                   noValidate
@@ -97,7 +101,9 @@ export class Login extends Component {
                                        type="password"
                                        required={true}
                                        tabIndex={2}
-                                       id="password"/>
+                                       id="password"
+                                       value={this.state.passwordValue}
+                                       onChange={(e) => { this.setState({passwordValue: e.target.value}) } }/>
                                 <label className={labelClass} htmlFor="password">Password</label>
                                 <span className={errorClass}>Password is required</span>
                             </div>
