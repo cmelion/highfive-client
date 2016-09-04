@@ -36,6 +36,12 @@ export class Login extends Component {
         /* eslint-enable no-undef */
     }
 
+    componentWillReceiveProps() {
+        if(this.props.error){
+            this.setState({passwordValue: ''});
+        }
+    }
+
     setFormState(newLabel) {
         this.setState({submitButtonLabel: newLabel});
     }
@@ -68,10 +74,6 @@ export class Login extends Component {
             fieldSetClass = 'mdl-textfield mdl-js-textfield mdl-textfield--floating-label extrawide';
 
         let form;
-
-        if(error){
-            this.setState({passwordValue: ''});
-        }
 
         return (
             <form onSubmit={(event) => event.preventDefault() & this.onSubmit(form, inputs)}
